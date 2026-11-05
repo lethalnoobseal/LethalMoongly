@@ -199,7 +199,7 @@ footer .kao { font: 400 24px/1.2 var(--font-display); color: #eeefeb; }
   <section class="win" aria-labelledby="t-art">
     <div class="bar"><h2 id="t-art">gallery</h2></div>
     <div class="win-body">
-      <ul class="gallery">
+      <ul class="gallery" id="drive-gallery">
         <li><img class="pic" src="https://media.discordapp.net/attachments/1263206933557547152/1567674905049440406/Hinata.png?ex=6aedb347&amp;is=6aec61c7&amp;hm=cfaa99a6dcb23196834f22076644de044627d2db2acd7511ccbe439e722fb786&amp;=&amp;format=webp&amp;quality=lossless&amp;width=512&amp;height=348" alt="Drawing of Hinata"></li>
         <li><img class="pic" src="https://media.discordapp.net/attachments/1074498680012427324/1567637722804523248/edward.png?ex=6aed90a6&amp;is=6aec3f26&amp;hm=8318741560323bec3a3d6972bc2f852ddd817c80e5e3d8df5796c1dffe45b998&amp;=&amp;format=webp&amp;quality=lossless&amp;width=768&amp;height=1024" alt="Drawing of Edward"></li>
         <li><img class="pic" src="https://media.discordapp.net/attachments/1074498680012427324/1560492844299456552/eh.png?ex=6aed47b6&amp;is=6aebf636&amp;hm=ebb05eed0db2e6c0c13b5d488c1aec2b61b486d3733ecf3bc9706e624aaeecf1&amp;=&amp;format=webp&amp;quality=lossless&amp;width=1024&amp;height=1024" alt="Character illustration"></li>
@@ -221,5 +221,58 @@ footer .kao { font: 400 24px/1.2 var(--font-display); color: #eeefeb; }
   </footer>
 
 </main>
+
+<script>
+(function () {
+  var feedUrl = 'https://script.google.com/macros/s/AKfycbz-9t3RCWeY437dMJGjtK-b90rhFE3J3Z-RW5A6qKP97o_PMuYksJPFUu6BMZIZyK2pBw/exec';
+  var gallery = document.getElementById('drive-gallery');
+
+  if (feedUrl.indexOf('https://script.google.com/macros/s/') !== 0) return;
+
+  function loadLatestImages() {
+    var callbackName = 'moonDriveGallery' + Date.now();
+    var script = document.createElement('script');
+    var finished = false;
+    var timeout;
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      window.clearTimeout(timeout);
+      script.remove();
+      delete window[callbackName];
+    }
+
+    window[callbackName] = function (images) {
+      finish();
+      if (!Array.isArray(images)) return;
+
+      var items = images.slice(0, 12).map(function (image) {
+        if (!image || typeof image.url !== 'string' || image.url.indexOf('https://drive.google.com/thumbnail?id=') !== 0) return null;
+        var item = document.createElement('li');
+        var picture = document.createElement('img');
+        picture.className = 'pic';
+        picture.src = image.url;
+        picture.alt = typeof image.name === 'string' ? image.name.replace(/\.[^.]+$/, '') : 'Drawing';
+        picture.loading = 'lazy';
+        picture.decoding = 'async';
+        item.appendChild(picture);
+        return item;
+      }).filter(Boolean);
+
+      if (items.length) gallery.replaceChildren.apply(gallery, items);
+    };
+
+    script.async = true;
+    script.onerror = finish;
+    script.src = feedUrl + (feedUrl.indexOf('?') === -1 ? '?' : '&') + 'callback=' + callbackName + '&refresh=' + Date.now();
+    timeout = window.setTimeout(finish, 15000);
+    document.head.appendChild(script);
+  }
+
+  loadLatestImages();
+  window.setInterval(loadLatestImages, 5 * 60 * 1000);
+})();
+</script>
 
 </body></html>
