@@ -1,0 +1,288 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Moon's House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* PARA PERSONALIZAR:
+   colores y tipografías: las variables de :root justo abajo (hay un set claro y uno oscuro).
+   textos, links y secciones: el HTML de más abajo, cada ventana es un <section class="win">.
+/* Layout: una columna angosta de "ventanitas" retro sobre fondo punteado, como un carrd.
+  Header, cinta de texto, links, stickers, galería y sobre mí. */
+:root {
+  --bg: #d8eadf;
+  --paper: #fffdf5;
+  --ink: #1b2a2c;
+  --ink-soft: #4a5e60;
+  --line: #1b2a2c;
+  --accent: #c93d28;
+  --on-accent: #ffffff;
+  --butter: #f4d553;
+  --on-butter: #1b2a2c;
+  --sky: #a6d6e8;
+  --on-sky: #1b2a2c;
+  --dots: rgba(27, 42, 44, 0.14);
+  --font-display: 'DotGothic16', 'Hiragino Sans', 'Noto Sans JP', monospace;
+  --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #102019;
+    --paper: #1a2b27;
+    --ink: #e8f1eb;
+    --ink-soft: #a5bab3;
+    --line: #e8f1eb;
+    --accent: #ff8670;
+    --on-accent: #1b1210;
+    --butter: #e5c441;
+    --on-butter: #1b2a2c;
+    --sky: #5ba9c4;
+    --on-sky: #0f1d22;
+    --dots: rgba(232, 241, 235, 0.10);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #102019;
+  --paper: #1a2b27;
+  --ink: #e8f1eb;
+  --ink-soft: #a5bab3;
+  --line: #e8f1eb;
+  --accent: #ff8670;
+  --on-accent: #1b1210;
+  --butter: #e5c441;
+  --on-butter: #1b2a2c;
+  --sky: #5ba9c4;
+  --on-sky: #0f1d22;
+  --dots: rgba(232, 241, 235, 0.10);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dots) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+  color: var(--ink);
+  font: 16px/1.6 var(--font-body);
+  padding-block: 28px 44px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.page { max-width: 620px; margin: 0 auto; display: grid; gap: 24px; }
+h1, h2, p, ul, figure, dl { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* ventanas */
+.win { background: var(--paper); border: 2px solid var(--line); box-shadow: 5px 5px 0 var(--line); min-width: 0; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 12px; background: var(--butter); color: var(--on-butter); border-bottom: 2px solid var(--line); }
+.bar h2 { font: 400 17px/1.3 var(--font-display); letter-spacing: 0.05em; }
+.bar .dots { display: flex; gap: 5px; flex: none; }
+.bar .dots i { display: block; width: 10px; height: 10px; border: 2px solid currentColor; }
+.bar--accent { background: var(--accent); color: var(--on-accent); }
+.bar--sky { background: var(--sky); color: var(--on-sky); }
+.win-body { padding: 16px; display: grid; gap: 14px; }
+
+/* header */
+.hero { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.avatar { width: 104px; height: 104px; flex: none; display: grid; place-items: center; background: var(--sky); color: var(--on-sky); border: 2px solid var(--line); box-shadow: 3px 3px 0 var(--line); transform: rotate(-3deg); font: 400 18px/1 var(--font-display); }
+.hero-text { flex: 1 1 220px; min-width: 0; display: grid; gap: 6px; }
+h1 { font: 400 clamp(28px, 8vw, 40px)/1.1 var(--font-display); letter-spacing: 0.02em; text-wrap: balance; overflow-wrap: anywhere; }
+.tagline { color: var(--ink-soft); }
+
+/* cinta */
+.marquee { overflow: hidden; border: 2px solid var(--line); background: var(--accent); color: var(--on-accent); font: 400 18px/1 var(--font-display); padding: 11px 0; white-space: nowrap; }
+.track { display: flex; width: max-content; animation: slide 26s linear infinite; }
+.half { display: flex; flex: none; }
+.half span { padding-right: 2.5rem; }
+@keyframes slide { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+
+/* links */
+.links { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; padding: 0; list-style: none; }
+.link { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; min-height: 48px; background: var(--paper); color: var(--ink); text-decoration: none; border: 2px solid var(--line); box-shadow: 3px 3px 0 var(--line); transition: transform 0.12s, box-shadow 0.12s, background 0.12s; }
+.link:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--line); background: var(--butter); color: var(--on-butter); }
+.link .name { font: 400 17px/1.2 var(--font-display); letter-spacing: 0.03em; }
+.link .handle { color: var(--ink-soft); font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.link:hover .handle { color: var(--on-butter); }
+@media (prefers-reduced-motion: reduce) { .link { transition: none; } }
+
+/* stickers */
+.stickers { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px; padding-block: 4px; }
+.sticker { font: 400 20px/1 var(--font-display); padding: 10px 14px; border: 2px solid var(--line); box-shadow: 3px 3px 0 var(--line); white-space: nowrap; }
+.s1 { background: var(--butter); color: var(--on-butter); transform: rotate(-4deg); }
+.s2 { background: var(--sky); color: var(--on-sky); transform: rotate(3deg); }
+.s3 { background: var(--accent); color: var(--on-accent); transform: rotate(-2deg); }
+.s4 { background: var(--paper); color: var(--ink); transform: rotate(4deg); }
+
+/* galería */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; padding: 0; list-style: none; }
+.frame { display: grid; gap: 6px; }
+.frame .pic { aspect-ratio: 4 / 5; max-width: 100%; display: grid; place-items: center; text-align: center; padding: 10px; border: 2px solid var(--line); background: repeating-linear-gradient(135deg, transparent 0 9px, var(--dots) 9px 11px), var(--bg); font: 400 18px/1.3 var(--font-display); color: var(--ink-soft); }
+.frame:nth-child(odd) .pic { transform: rotate(-1.2deg); }
+.frame:nth-child(even) .pic { transform: rotate(1deg); }
+.hint { font-size: 14px; color: var(--ink-soft); }
+
+/* sobre mí */
+.about p { max-width: 65ch; }
+
+footer { text-align: center; color: var(--ink-soft); font-size: 14px; display: grid; gap: 4px; }
+footer .kao { font: 400 18px/1.2 var(--font-display); color: var(--ink); }
+
+/* atmósfera de agua quieta y bosque en niebla */
+:root {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+html { background: #101311; }
+body {
+  background-color: #101311;
+  background-image: linear-gradient(rgba(11, 14, 12, 0.68), rgba(11, 14, 12, 0.86)), url('https://i.pinimg.com/736x/b6/18/fc/b618fc66a0fd9442ddeb338ab5d283c7.jpg');
+  background-position: center, center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #eeefeb;
+  font: 16px/1.7 var(--font-body);
+  padding-block: 0 48px;
+}
+.page { max-width: 900px; gap: 0; }
+h1 { font: 500 68px/0.98 var(--font-display); letter-spacing: 0; }
+.win { background: rgba(15, 18, 16, 0.78); border: 0; border-top: 1px solid rgba(238, 239, 235, 0.28); box-shadow: none; }
+.bar, .bar--accent, .bar--sky { background: transparent; color: #eeefeb; border-bottom: 0; padding: 18px 24px 0; }
+.bar h2 { font: 500 30px/1.1 var(--font-display); letter-spacing: 0; }
+.bar .dots { display: none; }
+.win-body { padding: 20px 24px 28px; gap: 20px; }
+.page > section:first-child {
+  min-height: min(76vh, 720px);
+  display: grid;
+  align-content: center;
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding: clamp(32px, 8vw, 104px) max(24px, calc((100vw - 852px) / 2));
+  border: 0;
+  background-color: #151917;
+  background-image: linear-gradient(90deg, rgba(10, 13, 11, 0.76), rgba(10, 13, 11, 0.12) 78%), url('https://i.pinimg.com/736x/8c/f7/9a/8cf79a1ceda0a00c4f43c5c783b1fdee.jpg');
+  background-position: center, center 56%;
+  background-size: cover;
+}
+.page > section:first-child .bar { display: none; }
+.page > section:first-child .win-body { padding: 0; }
+.hero { gap: 20px; }
+.avatar { width: 112px; height: 112px; flex: none; object-fit: cover; background: #aeb6af; border: 2px solid #111512; box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.72); transform: rotate(-4deg); }
+.hero-text { gap: 10px; }
+.tagline { color: rgba(238, 239, 235, 0.82); max-width: 48ch; }
+.marquee { margin-block: 28px; border: 0; border-top: 1px solid rgba(238, 239, 235, 0.3); border-bottom: 1px solid rgba(238, 239, 235, 0.3); background: transparent; color: rgba(238, 239, 235, 0.78); font: 500 20px/1.2 var(--font-display); padding: 12px 0; }
+.track { animation-duration: 38s; }
+.links { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0 28px; }
+.link { min-height: 58px; padding: 10px 0; background: transparent; color: #eeefeb; border: 0; border-bottom: 1px solid rgba(238, 239, 235, 0.24); box-shadow: none; }
+.link:hover { transform: none; box-shadow: none; background: transparent; color: #fff; }
+.link .name { font: 500 24px/1.1 var(--font-display); letter-spacing: 0; }
+.link .handle, .link:hover .handle { color: rgba(238, 239, 235, 0.58); }
+.stickers { padding-block: 36px; gap: 14px; }
+.sticker, .s1, .s2, .s3, .s4 {
+  width: 112px;
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  border: 2px solid #111512;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.72);
+  color: #171b18;
+  font: 500 21px/1 var(--font-display);
+}
+.s1 { background: #d5dad4; transform: rotate(-2deg); }
+.s2 { background: #aeb6af; transform: rotate(1.5deg); }
+.s3 { background: #59615b; color: #f0f1ed; transform: rotate(-1deg); }
+.s4 { background: #e6e8e2; transform: rotate(2deg); }
+.gallery { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px; }
+.frame .pic { background: linear-gradient(rgba(13, 16, 14, 0.55), rgba(13, 16, 14, 0.78)), url('https://i.pinimg.com/736x/b6/18/fc/b618fc66a0fd9442ddeb338ab5d283c7.jpg') center / cover; border: 1px solid rgba(238, 239, 235, 0.44); color: rgba(255, 255, 255, 0.8); font: 500 22px/1.3 var(--font-display); }
+.frame img.pic { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: contain; padding: 8px; background: #101311; }
+.frame:nth-child(odd) .pic, .frame:nth-child(even) .pic { transform: none; }
+.hint { color: rgba(238, 239, 235, 0.64); }
+footer { color: rgba(238, 239, 235, 0.62); padding-top: 36px; }
+footer .kao { font: 400 24px/1.2 var(--font-display); color: #eeefeb; }
+@media (max-width: 600px) {
+  h1 { font-size: 48px; }
+  .avatar { width: 76px; height: 76px; }
+  .hero { gap: 14px; }
+  .page > section:first-child { min-height: 68vh; background-position: center, 58% center; }
+  .win-body { padding-inline: 18px; }
+  .bar { padding-inline: 18px; }
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .frame .pic { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+</style>
+
+<main class="page">
+
+  <section class="win" aria-labelledby="t-name">
+    <div class="bar bar--accent"><h2>hello</h2><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="win-body">
+      <div class="hero">
+        <img class="avatar" src="https://64.media.tumblr.com/e215573d0e6bff8cfde1a3bae085d0fc/b78a37755c681f51-44/s2048x3072/40ecce529632999e54a2634a9dc1f93fabc0ff47.pnj" alt="Moon's profile picture">
+        <div class="hero-text">
+          <h1 id="t-name">Moon's House</h1>
+          <p class="tagline">I draw characters and things I like. Come in, take a look, don't be shy ^^</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <div class="half"><span>welcome to my little corner ( ´ ▽ ` )ﾉ</span><span>＊</span><span>come in, take a look, stay a while</span><span>＊</span><span>(´･ｪ･｀)</span><span>＊</span></div>
+      <div class="half"><span>welcome to my little corner ( ´ ▽ ` )ﾉ</span><span>＊</span><span>come in, take a look, stay a while</span><span>＊</span><span>(´･ｪ･｀)</span><span>＊</span></div>
+    </div>
+  </div>
+
+  <section class="win" aria-labelledby="t-links">
+    <div class="bar"><h2 id="t-links">social links</h2><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="win-body">
+      <ul class="links">
+        <li><a class="link" href="https://www.tumblr.com/moonglyx3" target="_blank" rel="noopener noreferrer"><span class="name">Tumblr</span><span class="handle">moonglyx3</span></a></li>
+        <li><a class="link" href="https://www.instagram.com/moontieneproblemitas/" target="_blank" rel="noopener noreferrer"><span class="name">Instagram</span><span class="handle">@moontieneproblemitas</span></a></li>
+        <li><a class="link" href="https://x.com/EndermiteSeal" target="_blank" rel="noopener noreferrer"><span class="name">Twitter</span><span class="handle">@EndermiteSeal</span></a></li>
+        <li><a class="link" href="https://www.youtube.com/@SeluneSeal" target="_blank" rel="noopener noreferrer"><span class="name">YouTube</span><span class="handle">@SeluneSeal</span></a></li>
+        <li><a class="link" href="https://www.facebook.com/profile.php?id=61593545356975" target="_blank" rel="noopener noreferrer"><span class="name">Facebook</span><span class="handle">Selune Seal</span></a></li>
+        <li><div class="link"><span class="name">Discord</span><span class="handle">Moongly420</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="stickers" aria-hidden="true">
+    <span class="sticker s1">(　＾ω＾)</span>
+    <span class="sticker s2">( ;｀Д´)</span>
+    <span class="sticker s3">(*｀ｴ´)</span>
+    <span class="sticker s4">(╥﹏╥)</span>
+    <span class="sticker s1">( _ゝ´)</span>
+  </div>
+
+  <section class="win" aria-labelledby="t-art">
+    <div class="bar bar--sky"><h2 id="t-art">gallery</h2><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="win-body">
+      <ul class="gallery">
+        <li><figure class="frame"><img class="pic" src="https://media.discordapp.net/attachments/1263206933557547152/1567674905049440406/Hinata.png?ex=6aedb347&amp;is=6aec61c7&amp;hm=cfaa99a6dcb23196834f22076644de044627d2db2acd7511ccbe439e722fb786&amp;=&amp;format=webp&amp;quality=lossless&amp;width=512&amp;height=348" alt="Drawing of Hinata"></figure></li>
+        <li><figure class="frame"><img class="pic" src="https://media.discordapp.net/attachments/1074498680012427324/1567637722804523248/edward.png?ex=6aed90a6&amp;is=6aec3f26&amp;hm=8318741560323bec3a3d6972bc2f852ddd817c80e5e3d8df5796c1dffe45b998&amp;=&amp;format=webp&amp;quality=lossless&amp;width=768&amp;height=1024" alt="Drawing of Edward"></figure></li>
+        <li><figure class="frame"><img class="pic" src="https://media.discordapp.net/attachments/1074498680012427324/1560492844299456552/eh.png?ex=6aed47b6&amp;is=6aebf636&amp;hm=ebb05eed0db2e6c0c13b5d488c1aec2b61b486d3733ecf3bc9706e624aaeecf1&amp;=&amp;format=webp&amp;quality=lossless&amp;width=1024&amp;height=1024" alt="Character illustration"></figure></li>
+        <li><figure class="frame"><img class="pic" src="https://64.media.tumblr.com/ac998b2735f2c905561673ca51e8d2f3/1a24ba7dd9495a56-f8/s2048x3072/d8839e715bd714476872fec8b1b8a52cc6f84dc4.pnj" alt="Character drawing"></figure></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="win about" aria-labelledby="t-about">
+    <div class="bar"><h2 id="t-about">about me</h2><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="win-body">
+      <p>Hi, I'm the artist behind this page. I create characters and illustrations.<br>I'm from Argentina.<br>Basic DNI.<br>Most active on Twitter and Discord.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="kao">( ´ ▽ ` )ﾉ</span>
+    <span>thanks for stopping by.</span>
+  </footer>
+
+</main>
+
+</body></html>
